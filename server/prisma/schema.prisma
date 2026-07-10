@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  senhaHash String
+  createdAt DateTime @default(now())
+
+  @@map("admins")
+}
+
+model Projeto {
+  id          Int        @id @default(autoincrement())
+  titulo      String
+  categoria   String
+  ano         Int
+  tecnologias String
+  linkProjeto String?
+  linkCodigo  String?
+  imagemUrl   String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  mensagens   Mensagem[]
+
+  @@map("projetos")
+}
+
+model Mensagem {
+  id         Int      @id @default(autoincrement())
+  nome       String
+  email      String
+  canalEnvio String
+  mensagem   String
+  projetoId  Int?
+  projeto    Projeto? @relation(fields: [projetoId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@map("mensagens")
+}
