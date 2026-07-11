@@ -187,7 +187,7 @@ function criarLinkAcao(url, classe, iconeHtml) {
 
 function criarCardProjeto(projeto) {
     const article = document.createElement('article');
-    article.className = 'work-card';
+    article.className = 'work-card visible';
 
     const figure = document.createElement('figure');
     figure.className = 'work-card-image';
