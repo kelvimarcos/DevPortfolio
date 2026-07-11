@@ -169,31 +169,132 @@ if (contactChat) {
     contactChatObserver.observe(contactChat);
 }
 
-// Formulário de Contato (WhatsApp e Email)
+// Projetos dinâmicos (vindos da API própria)
+const worksGrid = document.getElementById('worksGrid');
+
+const ICON_VER_PROJETO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" /><polyline points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21" y2="3" /></svg> Ver Projeto';
+const ICON_VER_CODIGO = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" /></svg> Ver Código';
+
+function criarLinkAcao(url, classe, iconeHtml) {
+    const a = document.createElement('a');
+    a.href = url || '#';
+    a.className = classe;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = iconeHtml;
+    return a;
+}
+
+function criarCardProjeto(projeto) {
+    const article = document.createElement('article');
+    article.className = 'work-card';
+
+    const figure = document.createElement('figure');
+    figure.className = 'work-card-image';
+    const img = document.createElement('img');
+    img.src = projeto.imagemUrl || 'img/projeto 1.png';
+    img.alt = projeto.titulo;
+    img.loading = 'lazy';
+    figure.appendChild(img);
+
+    const info = document.createElement('div');
+    info.className = 'work-card-info';
+
+    const meta = document.createElement('p');
+    meta.className = 'work-card-meta';
+    const category = document.createElement('span');
+    category.className = 'work-card-category';
+    category.textContent = projeto.categoria;
+    const year = document.createElement('span');
+    year.className = 'work-card-year';
+    year.textContent = projeto.ano;
+    meta.append(category, year);
+
+    const title = document.createElement('h3');
+    title.className = 'work-card-title';
+    title.textContent = projeto.titulo;
+
+    const tech = document.createElement('p');
+    tech.className = 'work-card-tech';
+    tech.textContent = projeto.tecnologias;
+
+    const actions = document.createElement('nav');
+    actions.className = 'work-card-actions';
+    actions.append(
+        criarLinkAcao(projeto.linkProjeto, 'work-card-btn work-card-view', ICON_VER_PROJETO),
+        criarLinkAcao(projeto.linkCodigo, 'work-card-btn work-card-btn-code', ICON_VER_CODIGO)
+    );
+
+    info.append(meta, title, tech, actions);
+    article.append(figure, info);
+    return article;
+}
+
+if (worksGrid) {
+    fetch(`${window.API_BASE_URL}/api/projetos`)
+        .then((res) => {
+            if (!res.ok) throw new Error('Falha ao carregar projetos.');
+            return res.json();
+        })
+        .then((projetos) => {
+            worksGrid.innerHTML = '';
+            if (!projetos.length) {
+                worksGrid.innerHTML = '<p class="works-error">Nenhum projeto cadastrado ainda.</p>';
+                return;
+            }
+            projetos.forEach((projeto) => worksGrid.appendChild(criarCardProjeto(projeto)));
+        })
+        .catch(() => {
+            worksGrid.innerHTML = '<p class="works-error">Não foi possível carregar os projetos agora. Tente novamente mais tarde.</p>';
+        });
+}
+
+// Formulário de Contato (envio real para a API)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    const feedbackEl = document.getElementById('contactFormFeedback');
+    const btnSpan = contactForm.querySelector('.btn-submit span');
+    const submitBtn = contactForm.querySelector('.btn-submit');
+    const originalBtnText = btnSpan.textContent;
+
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const name = document.getElementById('contactName').value;
+
+        const nome = document.getElementById('contactName').value;
         const email = document.getElementById('contactEmail').value;
-        const subject = document.getElementById('contactSubject').value;
-        const message = document.getElementById('contactMessage').value;
+        const canalEnvio = document.getElementById('contactSubject').value;
+        const mensagem = document.getElementById('contactMessage').value;
 
-        if (subject === 'Email') {
-            const emailSubject = encodeURIComponent(`Contato via Portfólio - ${name}`);
-            const emailBody = encodeURIComponent(`Olá Kelvison!\n\nMe chamo ${name}.\nEmail para contato: ${email}\n\nMensagem:\n${message}`);
-            window.location.href = `mailto:kelvison.marcos10@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-        } else {
-            const whatsappText = `Olá Kelvison! Me chamo ${name}.%0A%0A*Email:* ${email}%0A%0A*Mensagem:*%0A${message}`;
-            const whatsappUrl = `https://wa.me/5582981222429?text=${whatsappText}`;
-            window.open(whatsappUrl, '_blank');
+        feedbackEl.textContent = '';
+        feedbackEl.className = 'form-feedback';
+        submitBtn.disabled = true;
+        btnSpan.textContent = 'Enviando...';
+
+        try {
+            const res = await fetch(`${window.API_BASE_URL}/api/mensagens`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome, email, canalEnvio, mensagem }),
+            });
+
+            if (!res.ok) throw new Error('Falha ao enviar mensagem.');
+
+            btnSpan.textContent = 'Mensagem enviada!';
+            feedbackEl.textContent = 'Obrigado! Vou te responder em breve.';
+            feedbackEl.classList.add('form-feedback-success');
+            contactForm.reset();
+        } catch (err) {
+            btnSpan.textContent = originalBtnText;
+            feedbackEl.textContent = 'Não foi possível enviar sua mensagem agora. Tente novamente em instantes.';
+            feedbackEl.classList.add('form-feedback-error');
+        } finally {
+            submitBtn.disabled = false;
+            setTimeout(() => {
+                btnSpan.textContent = originalBtnText;
+                feedbackEl.textContent = '';
+                feedbackEl.className = 'form-feedback';
+            }, 4000);
         }
-
-        const btnSpan = contactForm.querySelector('.btn-submit span');
-        const originalText = btnSpan.textContent;
-        btnSpan.textContent = 'Enviado!';
-        contactForm.reset();
-        setTimeout(() => { btnSpan.textContent = originalText; }, 3000);
     });
 }
 

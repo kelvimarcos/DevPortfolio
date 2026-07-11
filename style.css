@@ -984,6 +984,15 @@ select {
     gap: 24px;
 }
 
+.works-loading,
+.works-error {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray-500);
+    font-size: 15px;
+}
+
 .work-card {
     position: relative;
     border-radius: 12px;
@@ -1368,6 +1377,20 @@ select {
 .form-group textarea {
     resize: vertical;
     min-height: 100px;
+}
+
+.form-feedback {
+    min-height: 20px;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.form-feedback-success {
+    color: #2e9e5b;
+}
+
+.form-feedback-error {
+    color: #e05252;
 }
 
 /* botões: base compartilhada */
