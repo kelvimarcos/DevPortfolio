@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Login administrativo | Kelvison Marcos</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <main class="admin-auth">
+        <form class="admin-card admin-form" id="loginForm">
+            <h1 class="admin-title">Área administrativa</h1>
+            <p class="admin-subtitle">Acesso restrito ao administrador do portfólio.</p>
+
+            <div class="admin-form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required autocomplete="username">
+            </div>
+
+            <div class="admin-form-group">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="admin-btn">Entrar</button>
+            <p class="admin-feedback" id="loginFeedback" role="status"></p>
+        </form>
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Painel administrativo | Kelvison Marcos</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <header class="admin-header">
+        <h1 class="admin-title">Painel administrativo</h1>
+        <div class="admin-header-actions">
+            <span id="adminEmail"></span>
+            <button type="button" class="admin-btn admin-btn-outline" id="logoutBtn">Sair</button>
+        </div>
+    </header>
+
+    <main class="admin-main">
+
+        <section class="admin-card">
+            <h2 class="admin-section-title">Novo projeto</h2>
+            <form class="admin-form admin-form-grid" id="projetoForm">
+                <input type="hidden" id="projetoId">
+                <div class="admin-form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="categoria">Categoria</label>
+                    <input type="text" id="categoria" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="ano">Ano</label>
+                    <input type="number" id="ano" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="tecnologias">Tecnologias</label>
+                    <input type="text" id="tecnologias" placeholder="React · TypeScript" required>
+                </div>
+                <div class="admin-form-group">
+                    <label for="linkProjeto">Link do projeto</label>
+                    <input type="url" id="linkProjeto">
+                </div>
+                <div class="admin-form-group">
+                    <label for="linkCodigo">Link do código</label>
+                    <input type="url" id="linkCodigo">
+                </div>
+                <div class="admin-form-group">
+                    <label for="imagemUrl">Imagem (caminho ou URL)</label>
+                    <input type="text" id="imagemUrl" placeholder="img/projeto 1.png">
+                </div>
+                <div class="admin-form-actions">
+                    <button type="submit" class="admin-btn" id="projetoSubmitBtn">Criar projeto</button>
+                    <button type="button" class="admin-btn admin-btn-outline" id="cancelarEdicaoBtn" hidden>Cancelar edição</button>
+                </div>
+            </form>
+            <p class="admin-feedback" id="projetoFormFeedback" role="status"></p>
+        </section>
+
+        <section class="admin-card">
+            <h2 class="admin-section-title">Projetos</h2>
+            <div class="admin-table-wrap">
+                <table class="admin-table" id="projetosTable">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Categoria</th>
+                            <th>Ano</th>
+                            <th>Tecnologias</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projetosTableBody">
+                        <tr><td colspan="5">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="admin-card">
+            <h2 class="admin-section-title">Mensagens recebidas</h2>
+            <div class="admin-table-wrap">
+                <table class="admin-table" id="mensagensTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Canal</th>
+                            <th>Mensagem</th>
+                            <th>Projeto</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mensagensTableBody">
+                        <tr><td colspan="7">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
