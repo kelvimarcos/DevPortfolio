@@ -36,6 +36,7 @@ model Mensagem {
   id         Int      @id @default(autoincrement())
   nome       String
   email      String
+  telefone   String
   canalEnvio String
   mensagem   String
   projetoId  Int?

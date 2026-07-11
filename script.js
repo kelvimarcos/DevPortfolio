@@ -262,6 +262,7 @@ if (contactForm) {
 
         const nome = document.getElementById('contactName').value;
         const email = document.getElementById('contactEmail').value;
+        const telefone = document.getElementById('contactPhone').value;
         const canalEnvio = document.getElementById('contactSubject').value;
         const mensagem = document.getElementById('contactMessage').value;
 
@@ -274,7 +275,7 @@ if (contactForm) {
             const res = await fetch(`${window.API_BASE_URL}/api/mensagens`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nome, email, canalEnvio, mensagem }),
+                body: JSON.stringify({ nome, email, telefone, canalEnvio, mensagem }),
             });
 
             if (!res.ok) throw new Error('Falha ao enviar mensagem.');

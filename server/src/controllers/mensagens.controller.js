@@ -2,15 +2,16 @@ const prisma = require('../config/prisma');
 
 async function criar(req, res, next) {
   try {
-    const { nome, email, canalEnvio, mensagem, projetoId } = req.body;
-    if (!nome || !email || !canalEnvio || !mensagem) {
-      return res.status(400).json({ error: 'nome, email, canalEnvio e mensagem são obrigatórios.' });
+    const { nome, email, telefone, canalEnvio, mensagem, projetoId } = req.body;
+    if (!nome || !email || !telefone || !canalEnvio || !mensagem) {
+      return res.status(400).json({ error: 'nome, email, telefone, canalEnvio e mensagem são obrigatórios.' });
     }
 
     const registro = await prisma.mensagem.create({
       data: {
         nome,
         email,
+        telefone,
         canalEnvio,
         mensagem,
         projetoId: projetoId ? Number(projetoId) : null,

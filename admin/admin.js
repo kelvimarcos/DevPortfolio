@@ -131,11 +131,11 @@ if (logoutBtn) {
     }
 
     async function carregarMensagens() {
-        mensagensTableBody.innerHTML = '<tr><td colspan="7">Carregando...</td></tr>';
+        mensagensTableBody.innerHTML = '<tr><td colspan="8">Carregando...</td></tr>';
         try {
             const mensagens = await apiFetch('/api/mensagens');
             if (!mensagens.length) {
-                mensagensTableBody.innerHTML = '<tr><td colspan="7">Nenhuma mensagem recebida ainda.</td></tr>';
+                mensagensTableBody.innerHTML = '<tr><td colspan="8">Nenhuma mensagem recebida ainda.</td></tr>';
                 return;
             }
             mensagensTableBody.innerHTML = '';
@@ -146,6 +146,8 @@ if (logoutBtn) {
                 tdNome.textContent = mensagem.nome;
                 const tdEmail = document.createElement('td');
                 tdEmail.textContent = mensagem.email;
+                const tdTelefone = document.createElement('td');
+                tdTelefone.textContent = mensagem.telefone;
                 const tdCanal = document.createElement('td');
                 tdCanal.textContent = mensagem.canalEnvio;
                 const tdMensagem = document.createElement('td');
@@ -167,11 +169,11 @@ if (logoutBtn) {
                 });
                 tdAcoes.appendChild(excluirBtn);
 
-                tr.append(tdNome, tdEmail, tdCanal, tdMensagem, tdProjeto, tdData, tdAcoes);
+                tr.append(tdNome, tdEmail, tdTelefone, tdCanal, tdMensagem, tdProjeto, tdData, tdAcoes);
                 mensagensTableBody.appendChild(tr);
             });
         } catch (err) {
-            mensagensTableBody.innerHTML = '<tr><td colspan="7">Não foi possível carregar as mensagens.</td></tr>';
+            mensagensTableBody.innerHTML = '<tr><td colspan="8">Não foi possível carregar as mensagens.</td></tr>';
         }
     }
 
