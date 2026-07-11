@@ -496,7 +496,7 @@ select {
     margin-bottom: 35px;
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeUp 0.8s var(--ease-out) 1.2s forwards;
+    animation: fadeUp 0.8s var(--ease-out) 0s forwards;
 }
 
 .hero-label-line {
@@ -525,15 +525,15 @@ select {
 }
 
 .hero-title-line:nth-child(1) {
-    animation-delay: 1.4s;
+    animation-delay: 0.1s;
 }
 
 .hero-title-line:nth-child(2) {
-    animation-delay: 1.55s;
+    animation-delay: 0.2s;
 }
 
 .hero-title-line:nth-child(3) {
-    animation-delay: 1.7s;
+    animation-delay: 0.3s;
 }
 
 .hero-title-accent {
@@ -550,7 +550,7 @@ select {
     align-items: flex-end;
     justify-content: space-between;
     opacity: 0;
-    animation: fadeUp 0.8s var(--ease-out) 2s forwards;
+    animation: fadeUp 0.8s var(--ease-out) 0.4s forwards;
     padding: 10px;
 }
 
@@ -1778,7 +1778,7 @@ select {
     }
 
     .about-photo {
-        max-width: 100%;
+        max-width: 480px;
         margin: 0 auto;
     }
 
