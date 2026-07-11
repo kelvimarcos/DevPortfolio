@@ -230,12 +230,27 @@ function criarCardProjeto(projeto) {
     return article;
 }
 
+function esperar(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function buscarProjetos(tentativa = 1) {
+    try {
+        const res = await fetch(`${window.API_BASE_URL}/api/projetos`);
+        if (!res.ok) throw new Error('Falha ao carregar projetos.');
+        return await res.json();
+    } catch (err) {
+        // o back-end gratuito pode estar "dormindo" (cold start) e demorar pra responder
+        if (tentativa < 3) {
+            await esperar(tentativa * 3000);
+            return buscarProjetos(tentativa + 1);
+        }
+        throw err;
+    }
+}
+
 if (worksGrid) {
-    fetch(`${window.API_BASE_URL}/api/projetos`)
-        .then((res) => {
-            if (!res.ok) throw new Error('Falha ao carregar projetos.');
-            return res.json();
-        })
+    buscarProjetos()
         .then((projetos) => {
             worksGrid.innerHTML = '';
             if (!projetos.length) {

@@ -739,9 +739,10 @@ select {
 
 /* foto do sobre */
 .about-photo {
-    border-radius: 16px;
+    border-radius: 8px;
     overflow: hidden;
-    max-width: 380px;
+    width: 100%;
+    background-color: var(--dark-card);
 }
 
 .about-photo img {
