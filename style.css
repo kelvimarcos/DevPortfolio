@@ -1777,6 +1777,11 @@ select {
         width: 100%;
     }
 
+    .about-photo {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
     .about-photo img,
     .experience-image img {
         margin: 0 auto;
@@ -2071,11 +2076,6 @@ select {
         font-size: clamp(32px, 13vw, 80px);
         letter-spacing: -1px;
         white-space: nowrap;
-    }
-
-    .about-photo {
-        max-width: 250px;
-        margin: 0 auto;
     }
 
     /* slider linkedin */
