@@ -257,6 +257,17 @@ if (contactForm) {
     const submitBtn = contactForm.querySelector('.btn-submit');
     const originalBtnText = btnSpan.textContent;
 
+    function validarFormulario({ nome, email, telefone, canalEnvio, mensagem }) {
+        if (!nome.trim()) return 'Preencha seu nome.';
+        if (!email.trim()) return 'Preencha seu email.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Digite um email válido.';
+        if (!telefone.trim()) return 'Preencha seu telefone.';
+        if (telefone.replace(/\D/g, '').length < 10) return 'Digite um telefone válido, com DDD.';
+        if (!canalEnvio) return 'Selecione uma opção de retorno.';
+        if (!mensagem.trim()) return 'Escreva sua mensagem.';
+        return null;
+    }
+
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -268,6 +279,14 @@ if (contactForm) {
 
         feedbackEl.textContent = '';
         feedbackEl.className = 'form-feedback';
+
+        const erroValidacao = validarFormulario({ nome, email, telefone, canalEnvio, mensagem });
+        if (erroValidacao) {
+            feedbackEl.textContent = erroValidacao;
+            feedbackEl.classList.add('form-feedback-error');
+            return;
+        }
+
         submitBtn.disabled = true;
         btnSpan.textContent = 'Enviando...';
 
