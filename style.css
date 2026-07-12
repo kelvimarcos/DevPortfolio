@@ -171,19 +171,29 @@ select {
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: 20px;
+   
 }
 
 .nav-links li {
     list-style: none;
+    padding: 1px 7px;
 }
 
 .nav-links a {
     text-decoration: none;
     color: #ffffff;
     font-size: 13px;
-    transition: color 0.3s ease;
+    transition: color 0.5s ease;
     font-weight: 100;
+}
+
+.nav-links li:hover {
+    color: #ffffff;
+    border-radius: 20px;
+    background-color: #4d4d4d94;
+    backdrop-filter: blur(10px);
+   
 }
 
 .header-actions {
@@ -721,25 +731,24 @@ select {
 }
 
 .skill-tag {
-    padding: 10px 24px;
+    padding: 12px 24px;
     border: 1px solid var(--dark-border);
     border-radius: 100px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
     color: var(--gray-600);
     transition: all 0.3s var(--ease-out);
 }
 
 .skill-tag:hover {
-    background: var(--gray-600);
-    color: var(--white);
+    background: var(--gray-300);
     border-color: var(--dark-card);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
 }
 
 /* foto do sobre */
 .about-photo {
-    border-radius: 8px;
+    border-radius: 16px;
     overflow: hidden;
     width: 100%;
     background-color: var(--dark-card);
@@ -755,18 +764,6 @@ select {
 
 .about-photo:hover img {
     transform: scale(1.03);
-}
-
-.about-name {
-    font-family: var(--font-display);
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--white);
-}
-
-.about-role {
-    font-size: 14px;
-    color: var(--gray-500);
 }
 
 /* seção de experiência */
@@ -1786,6 +1783,8 @@ select {
     .about-photo img,
     .experience-image img {
         margin: 0 auto;
+        width: 100%;
+        
     }
 
     .experience-content {
