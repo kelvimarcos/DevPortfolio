@@ -249,18 +249,37 @@ async function buscarProjetos(tentativa = 1) {
     }
 }
 
+function renderizarProjetos(projetos) {
+    worksGrid.innerHTML = '';
+    if (!projetos.length) {
+        worksGrid.innerHTML = '<p class="works-error">Nenhum projeto cadastrado ainda.</p>';
+        return;
+    }
+    projetos.forEach((projeto) => worksGrid.appendChild(criarCardProjeto(projeto)));
+}
+
 if (worksGrid) {
+    // mostra a última lista salva enquanto a API responde
+    let projetosSalvos = null;
+    try {
+        projetosSalvos = JSON.parse(localStorage.getItem('projetosCache'));
+    } catch (err) {
+        projetosSalvos = null;
+    }
+
+    if (projetosSalvos && projetosSalvos.length) {
+        renderizarProjetos(projetosSalvos);
+    }
+
     buscarProjetos()
         .then((projetos) => {
-            worksGrid.innerHTML = '';
-            if (!projetos.length) {
-                worksGrid.innerHTML = '<p class="works-error">Nenhum projeto cadastrado ainda.</p>';
-                return;
-            }
-            projetos.forEach((projeto) => worksGrid.appendChild(criarCardProjeto(projeto)));
+            localStorage.setItem('projetosCache', JSON.stringify(projetos));
+            renderizarProjetos(projetos);
         })
         .catch(() => {
-            worksGrid.innerHTML = '<p class="works-error">Não foi possível carregar os projetos agora. Tente novamente mais tarde.</p>';
+            if (!projetosSalvos || !projetosSalvos.length) {
+                worksGrid.innerHTML = '<p class="works-error">Não foi possível carregar os projetos agora. Tente novamente mais tarde.</p>';
+            }
         });
 }
 
