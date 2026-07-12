@@ -6,29 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Login administrativo | Kelvison Marcos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="admin.css">
+    <link rel="shortcut icon" href="../favicon_io/favicon.ico" type="image/x-icon">
 </head>
 
-<body>
+<body class="login-page">
 
     <main class="admin-auth">
-        <form class="admin-card admin-form" id="loginForm">
-            <h1 class="admin-title">Área administrativa</h1>
-            <p class="admin-subtitle">Acesso restrito ao administrador do portfólio.</p>
+        <div class="login-card">
 
-            <div class="admin-form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" required autocomplete="username">
+            <div class="login-card-top">
+                <img src="../img/logo.png" alt="Logo Kelvison Marcos" class="login-logo">
+                <img src="../img/foto-perfil.png" alt="Foto de Kelvison" class="login-avatar">
             </div>
 
-            <div class="admin-form-group">
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" required autocomplete="current-password">
-            </div>
+            <form class="login-card-body admin-form" id="loginForm">
+                <h1 class="login-title">Bem-vindo de volta</h1>
+                <p class="login-subtitle">Entre para gerenciar seu portfólio.</p>
 
-            <button type="submit" class="admin-btn">Entrar</button>
-            <p class="admin-feedback" id="loginFeedback" role="status"></p>
-        </form>
+                <div class="admin-form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="seu@email.com" required autocomplete="username">
+                </div>
+
+                <div class="admin-form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="••••••••" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="admin-btn login-btn">Entrar</button>
+                <p class="admin-feedback" id="loginFeedback" role="status"></p>
+
+                <a href="../index.html" class="login-back">Voltar ao portfólio</a>
+            </form>
+
+        </div>
     </main>
 
     <script src="../js/config.js"></script>
