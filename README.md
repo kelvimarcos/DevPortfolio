@@ -10,6 +10,9 @@ Este é o meu portfólio pessoal, desenvolvido como projeto full stack da minha 
 
 ![Design final do projeto](readmeIMG/Designer.png)
 
+<br/>
+<br/>
+
 ---
 
 <br/>
