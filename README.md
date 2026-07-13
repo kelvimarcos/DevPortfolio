@@ -5,9 +5,15 @@
 
 Este é o meu portfólio pessoal, desenvolvido como projeto full stack da minha formação em desenvolvimento web. Ele começou como um site estático e evoluiu para uma aplicação completa: o front-end consome uma API própria para exibir os projetos e receber mensagens de contato, e um painel administrativo protegido por login me permite gerenciar todo o conteúdo sem tocar no código.
 
+<br/>
+<br/>
+
 ![Design final do projeto](readmeIMG/Designer.png)
 
+---
 
+<br/>
+<br/>
 
 ## 🌐 Acesse o Projeto
 
