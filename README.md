@@ -222,11 +222,16 @@ Filtro de projetos por categoria na página inicial <br/>
 <br/>
 
 
-## 🧭 Usabilidade
+### 📱 Interação de chat
 
-O projeto nasceu no wireframe abaixo, onde defini a estrutura das seções antes de partir para o design e o código:
+Um detalhe de usabilidade que gosto de destacar: na seção de contato, simulei uma conversa real de mensageiro. Primeiro aparece o indicador de "digitando..."  <br/> 
+e, em seguida, a mensagem chega como se eu estivesse falando com o visitante naquele momento. É um toque pequeno, mas aproxima a experiência de algo humano e convida <br/>
+a pessoa a iniciar a conversa.
 
-![Wireframe do projeto](readmeIMG/Wireframe.png)
+| Digitando... | Mensagem recebida |
+|---|---|
+| ![Indicador de digitando](readmeIMG/mensagem2.png) | ![Mensagem recebida](readmeIMG/mensagem1.png) |
+
 
 
 <br/>
@@ -238,12 +243,8 @@ O projeto nasceu no wireframe abaixo, onde defini a estrutura das seções antes
 <br/>
 
 
-### 📱 Interação de chat
+## 🧭 Usabilidade
 
-Um detalhe de usabilidade que gosto de destacar: na seção de contato, simulei uma conversa real de mensageiro. Primeiro aparece o indicador de "digitando..."  <br/> 
-e, em seguida, a mensagem chega — como se eu estivesse falando com o visitante naquele momento. É um toque pequeno, mas aproxima a experiência de algo humano e convida <br/>
-a pessoa a iniciar a conversa.
+O projeto nasceu no wireframe abaixo, onde defini a estrutura das seções antes de partir para o design e o código:
 
-| Digitando... | Mensagem recebida |
-|---|---|
-| ![Indicador de digitando](readmeIMG/mensagem2.png) | ![Mensagem recebida](readmeIMG/mensagem1.png) |
+![Wireframe do projeto](readmeIMG/Wireframe.png)
