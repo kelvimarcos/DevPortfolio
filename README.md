@@ -223,10 +223,20 @@ O projeto nasceu no wireframe abaixo, onde defini a estrutura das seções antes
 
 ![Wireframe do projeto](readmeIMG/Wireframe.png)
 
+
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
+
+
 ### Interação de chat
 
 Um detalhe de usabilidade que gosto de destacar: na seção de contato, simulei uma conversa real de mensageiro. Primeiro aparece o indicador de "digitando..." e, em seguida, a mensagem chega — como se eu estivesse falando com o visitante naquele momento. É um toque pequeno, mas aproxima a experiência de algo humano e convida a pessoa a iniciar a conversa.
 
 | Digitando... | Mensagem recebida |
 |---|---|
-| ![Indicador de digitando](readmeIMG/mensagem1.png) | ![Mensagem recebida](readmeIMG/mensagem2.png) |
+| ![Indicador de digitando](readmeIMG/mensagem2.png) | ![Mensagem recebida](readmeIMG/mensagem1.png) |
