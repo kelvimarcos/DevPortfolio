@@ -6,7 +6,7 @@ API REST em Express que da suporte ao portfolio (`../index.html`), com persisten
 
 - **Admin** - usuario unico, dono do portfolio. `id, email, senhaHash, createdAt`.
 - **Projeto** - projetos exibidos no portfolio. `id, titulo, categoria, ano, tecnologias, linkProjeto, linkCodigo, imagemUrl, createdAt, updatedAt`.
-- **Mensagem** - mensagens enviadas pelo formulario de contato. `id, nome, email, canalEnvio, mensagem, projetoId (FK opcional), createdAt`.
+- **Mensagem** - mensagens enviadas pelo formulario de contato. `id, nome, email, telefone, canalEnvio, mensagem, projetoId (FK opcional), createdAt`.
 
 ## Endpoints
 
@@ -43,3 +43,7 @@ npm run dev
 ```
 
 A API sobe em `http://localhost:3333`.
+
+## Producao
+
+A API roda no Render (Docker, ver `Dockerfile`) com banco PostgreSQL no Supabase. As mesmas variaveis do `.env.example` sao configuradas no painel do Render — em producao, `NODE_ENV=production` ativa o cookie `Secure` com `SameSite=None`, necessario porque o front (GitHub Pages) e a API (Render) ficam em dominios diferentes.
