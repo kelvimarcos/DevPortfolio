@@ -30,23 +30,48 @@ Você pode visualizar o projeto diretamente pelo navegador:
 
 <br/>
 <br/>
+
 ---
+
 <br/>
 <br/>
 
 ## 💡 Insight
 
-Um portfólio que se gerencia sozinho: em vez de editar HTML e fazer novo deploy toda vez que quero trocar um projeto ou revisar um texto, eu entro no meu próprio painel, altero e o site reflete na hora. Além de resolver um problema real meu, o projeto demonstra o ciclo completo de uma aplicação web — interface, API, banco de dados, autenticação e deploy.
+Em vez de editar HTML e fazer novo deploy toda vez que quero trocar um projeto ou revisar um texto, eu entro no meu próprio painel, altero e o site reflete na hora. Além de resolver um problema real meu, o projeto demonstra o ciclo completo de uma aplicação web — interface, API, banco de dados, autenticação e deploy.
+
+
+
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
 
 
 
 ## 🎨 Design
 
-- Tema escuro com destaque em laranja, tipografia Inter e hierarquia visual forte
+
+- O projeto começou na criação da minha própria identidade visual e reflete perfeitamente o que quero transmitir.
+- Tema escuro com destaque em laranja, tipografia Inter e hierarquia visual forte e fonte moderna.
 - Hero com animação de entrada e faixa de tecnologias em movimento (marquee)
 - Animações de revelação ao rolar a página
 - Painel administrativo com identidade visual própria, alinhada à marca do site
 - Layout responsivo para desktop, tablet e mobile
+
+
+
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
+
 
 
 
@@ -60,6 +85,15 @@ Um portfólio que se gerencia sozinho: em vez de editar HTML e fazer novo deploy
 
 
 
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
+
+
 ## ⚙️ Back-end
 
 - API REST em Node.js com Express, organizada em rotas, controllers e middlewares
@@ -68,6 +102,14 @@ Um portfólio que se gerencia sozinho: em vez de editar HTML e fazer novo deploy
 - Rotas privadas protegidas por middleware de autenticação
 - Publicado no Render via Docker, com banco no Supabase
 
+
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
 
 
 ## 🚀 Funcionalidades
@@ -79,6 +121,15 @@ Um portfólio que se gerencia sozinho: em vez de editar HTML e fazer novo deploy
 - Visualização e exclusão das mensagens recebidas, com vínculo ao projeto de interesse
 - Menu mobile animado e navegação suave entre seções
 
+
+
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
 
 
 ## 🛠️ Tecnologias Utilizadas
@@ -93,6 +144,14 @@ Docker → Container do back-end
 GitHub Pages, Render e Supabase → Deploy
 
 
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
+
 
 ## 📖 O que aprendi com este projeto
 
@@ -105,31 +164,41 @@ Integrar front-end e back-end de forma incremental, sem quebrar o que já funcio
 
 
 
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
+
+
 ## ▶️ Rodando localmente
 
 Pré-requisitos: Node.js e PostgreSQL instalados.
 
-```bash
-cd server
-npm install
-cp .env.example .env   # preencher com suas credenciais
-npx prisma migrate dev
-npm run seed
-npm run dev
-```
 
-Depois, sirva a raiz do projeto em `http://localhost:5501` (Live Server ou `npx http-server . -a localhost -p 5501`) e ajuste o `js/config.js` para `http://localhost:3333`.
+<br/>
+<br/>
 
-> Importante: usar `localhost` (e não `127.0.0.1`) para o cookie de sessão funcionar entre front e back.
+---
 
-A documentação completa do back-end está em [`server/README.md`](server/README.md).
-
+<br/>
+<br/>
 
 
 ## ⚠️ Observações Importantes
 
-O deploy da API foi feito no Render em vez do Google Cloud Run por conta de problemas na verificação de faturamento da conta Google — a alternativa é gratuita e roda o mesmo container Docker. No plano gratuito, a API hiberna após um período sem acessos e a primeira visita pode levar alguns segundos (mitigado pelo cache local dos projetos).
+O deploy da API foi feito no Render.
 
+
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
 
 
 ## 📌 Próximos Passos
@@ -139,6 +208,13 @@ Notificação por email quando uma nova mensagem chegar
 Monitoramento da API para evitar a hibernação do plano gratuito
 Filtro de projetos por categoria na página inicial
 
+<br/>
+<br/>
+
+---
+
+<br/>
+<br/>
 
 
 ## 🧭 Usabilidade
