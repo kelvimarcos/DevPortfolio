@@ -25,6 +25,11 @@ Você pode visualizar o projeto diretamente pelo navegador:
 - Painel administrativo: acesso restrito por login
 
 
+<br/>
+<br/>
+---
+<br/>
+<br/>
 
 ## 💡 Insight
 
