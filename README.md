@@ -204,24 +204,6 @@ O deploy da API foi feito no Render.
 <br/>
 
 
-## 📌 Próximos Passos
-
-Adicionar meus projetos pessoais. <br/>
-Melhora do UX do chat para melhor conversão. <br/>
-Upload de imagem direto pelo painel (ex: Supabase Storage) <br/>
-Notificação por email quando uma nova mensagem chegar <br/>
-Monitoramento da API para evitar a hibernação do plano gratuito <br/>
-Filtro de projetos por categoria na página inicial <br/>
-
-<br/>
-<br/>
-
----
-
-<br/>
-<br/>
-
-
 ### 📱 Interação de chat
 
 Um detalhe de usabilidade que gosto de destacar: na seção de contato, simulei uma conversa real de mensageiro. Primeiro aparece o indicador de "digitando..."  <br/> 
@@ -248,3 +230,20 @@ a pessoa a iniciar a conversa.
 O projeto nasceu no wireframe abaixo, onde defini a estrutura das seções antes de partir para o design e o código:
 
 ![Wireframe do projeto](readmeIMG/Wireframe.png)
+
+
+
+<br/>
+<br/>
+
+---
+
+
+## 📌 Próximos Passos
+
+Adicionar meus projetos pessoais. <br/>
+Melhora do UX do chat para melhor conversão. <br/>
+Upload de imagem direto pelo painel (ex: Supabase Storage) <br/>
+Notificação por email quando uma nova mensagem chegar <br/>
+Monitoramento da API para evitar a hibernação do plano gratuito <br/>
+Filtro de projetos por categoria na página inicial <br/>
