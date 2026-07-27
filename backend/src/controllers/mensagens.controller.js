@@ -17,6 +17,13 @@ async function criar(req, res, next) {
         projetoId: projetoId ? Number(projetoId) : null,
       },
     });
+
+    // envio tradicional de formulário volta para o site
+    if (req.is('application/x-www-form-urlencoded')) {
+      const origem = (req.get('referer') || '/').split('?')[0].split('#')[0];
+      return res.redirect(`${origem}?enviado=1#contato`);
+    }
+
     res.status(201).json(registro);
   } catch (err) {
     next(err);

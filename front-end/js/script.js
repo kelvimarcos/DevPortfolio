@@ -283,73 +283,18 @@ if (worksGrid) {
         });
 }
 
-// Formulário de Contato (envio real para a API)
+// Formulário de Contato (envio tradicional para a API)
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
+    contactForm.action = `${window.API_BASE_URL}/api/mensagens`;
+
+    // mensagem de agradecimento quando a API redireciona de volta
     const feedbackEl = document.getElementById('contactFormFeedback');
-    const btnSpan = contactForm.querySelector('.btn-submit span');
-    const submitBtn = contactForm.querySelector('.btn-submit');
-    const originalBtnText = btnSpan.textContent;
-
-    function validarFormulario({ nome, email, telefone, canalEnvio, mensagem }) {
-        if (!nome.trim()) return 'Preencha seu nome.';
-        if (!email.trim()) return 'Preencha seu email.';
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Digite um email válido.';
-        if (!telefone.trim()) return 'Preencha seu telefone.';
-        if (telefone.replace(/\D/g, '').length < 10) return 'Digite um telefone válido, com DDD.';
-        if (!canalEnvio) return 'Selecione uma opção de retorno.';
-        if (!mensagem.trim()) return 'Escreva sua mensagem.';
-        return null;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('enviado') === '1') {
+        feedbackEl.textContent = 'Obrigado! Vou te responder em breve.';
+        feedbackEl.classList.add('form-feedback-success');
     }
-
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const nome = document.getElementById('contactName').value;
-        const email = document.getElementById('contactEmail').value;
-        const telefone = document.getElementById('contactPhone').value;
-        const canalEnvio = document.getElementById('contactSubject').value;
-        const mensagem = document.getElementById('contactMessage').value;
-
-        feedbackEl.textContent = '';
-        feedbackEl.className = 'form-feedback';
-
-        const erroValidacao = validarFormulario({ nome, email, telefone, canalEnvio, mensagem });
-        if (erroValidacao) {
-            feedbackEl.textContent = erroValidacao;
-            feedbackEl.classList.add('form-feedback-error');
-            return;
-        }
-
-        submitBtn.disabled = true;
-        btnSpan.textContent = 'Enviando...';
-
-        try {
-            const res = await fetch(`${window.API_BASE_URL}/api/mensagens`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nome, email, telefone, canalEnvio, mensagem }),
-            });
-
-            if (!res.ok) throw new Error('Falha ao enviar mensagem.');
-
-            btnSpan.textContent = 'Mensagem enviada!';
-            feedbackEl.textContent = 'Obrigado! Vou te responder em breve.';
-            feedbackEl.classList.add('form-feedback-success');
-            contactForm.reset();
-        } catch (err) {
-            btnSpan.textContent = originalBtnText;
-            feedbackEl.textContent = 'Não foi possível enviar sua mensagem agora. Tente novamente em instantes.';
-            feedbackEl.classList.add('form-feedback-error');
-        } finally {
-            submitBtn.disabled = false;
-            setTimeout(() => {
-                btnSpan.textContent = originalBtnText;
-                feedbackEl.textContent = '';
-                feedbackEl.className = 'form-feedback';
-            }, 4000);
-        }
-    });
 }
 
 // Rolagem Suave

@@ -19,6 +19,7 @@ const allowedOrigins = (process.env.CORS_ORIGIN || '')
 
 app.use(cors({ origin: allowedOrigins.length ? allowedOrigins : true, credentials: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(sessionMiddleware);
 
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
