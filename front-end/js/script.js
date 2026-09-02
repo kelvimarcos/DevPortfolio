@@ -240,9 +240,10 @@ async function buscarProjetos(tentativa = 1) {
         if (!res.ok) throw new Error('Falha ao carregar projetos.');
         return await res.json();
     } catch (err) {
-        // o back-end gratuito pode estar "dormindo" (cold start) e demorar pra responder
-        if (tentativa < 3) {
-            await esperar(tentativa * 3000);
+        // o back-end gratuito pode estar "dormindo" (cold start) e leva de 30s a 1min
+        // pra acordar, então insistimos por tempo suficiente antes de desistir
+        if (tentativa < 8) {
+            await esperar(Math.min(tentativa * 3000, 10000));
             return buscarProjetos(tentativa + 1);
         }
         throw err;
