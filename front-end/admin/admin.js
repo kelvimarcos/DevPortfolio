@@ -71,6 +71,54 @@ if (logoutBtn) {
         cancelarEdicaoBtn.hidden = true;
     }
 
+    function preencherFormularioProjeto(projeto) {
+        projetoIdInput.value = projeto.id;
+        document.getElementById('titulo').value = projeto.titulo;
+        document.getElementById('categoria').value = projeto.categoria;
+        document.getElementById('ano').value = projeto.ano;
+        document.getElementById('tecnologias').value = projeto.tecnologias;
+        document.getElementById('linkProjeto').value = projeto.linkProjeto || '';
+        document.getElementById('linkCodigo').value = projeto.linkCodigo || '';
+        document.getElementById('imagemUrl').value = projeto.imagemUrl || '';
+        projetoSubmitBtn.textContent = 'Salvar alterações';
+        cancelarEdicaoBtn.hidden = false;
+        projetoForm.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function criarLinhaProjeto(projeto) {
+        const tr = document.createElement('tr');
+
+        const tdTitulo = document.createElement('td');
+        tdTitulo.textContent = projeto.titulo;
+        const tdCategoria = document.createElement('td');
+        tdCategoria.textContent = projeto.categoria;
+        const tdAno = document.createElement('td');
+        tdAno.textContent = projeto.ano;
+        const tdTecnologias = document.createElement('td');
+        tdTecnologias.textContent = projeto.tecnologias;
+
+        const tdAcoes = document.createElement('td');
+        const editarBtn = document.createElement('button');
+        editarBtn.type = 'button';
+        editarBtn.className = 'admin-btn admin-btn-small admin-btn-outline';
+        editarBtn.textContent = 'Editar';
+        editarBtn.addEventListener('click', () => preencherFormularioProjeto(projeto));
+
+        const excluirBtn = document.createElement('button');
+        excluirBtn.type = 'button';
+        excluirBtn.className = 'admin-btn admin-btn-small admin-btn-danger';
+        excluirBtn.textContent = 'Excluir';
+        excluirBtn.addEventListener('click', async () => {
+            if (!confirm(`Excluir o projeto "${projeto.titulo}"?`)) return;
+            await apiFetch(`/api/projetos/${projeto.id}`, { method: 'DELETE' });
+            carregarProjetos();
+        });
+
+        tdAcoes.append(editarBtn, excluirBtn);
+        tr.append(tdTitulo, tdCategoria, tdAno, tdTecnologias, tdAcoes);
+        return tr;
+    }
+
     async function carregarProjetos() {
         projetosTableBody.innerHTML = '<tr><td colspan="5">Carregando...</td></tr>';
         try {
@@ -81,49 +129,7 @@ if (logoutBtn) {
             }
             projetosTableBody.innerHTML = '';
             projetos.forEach((projeto) => {
-                const tr = document.createElement('tr');
-
-                const tdTitulo = document.createElement('td');
-                tdTitulo.textContent = projeto.titulo;
-                const tdCategoria = document.createElement('td');
-                tdCategoria.textContent = projeto.categoria;
-                const tdAno = document.createElement('td');
-                tdAno.textContent = projeto.ano;
-                const tdTecnologias = document.createElement('td');
-                tdTecnologias.textContent = projeto.tecnologias;
-
-                const tdAcoes = document.createElement('td');
-                const editarBtn = document.createElement('button');
-                editarBtn.type = 'button';
-                editarBtn.className = 'admin-btn admin-btn-small admin-btn-outline';
-                editarBtn.textContent = 'Editar';
-                editarBtn.addEventListener('click', () => {
-                    projetoIdInput.value = projeto.id;
-                    document.getElementById('titulo').value = projeto.titulo;
-                    document.getElementById('categoria').value = projeto.categoria;
-                    document.getElementById('ano').value = projeto.ano;
-                    document.getElementById('tecnologias').value = projeto.tecnologias;
-                    document.getElementById('linkProjeto').value = projeto.linkProjeto || '';
-                    document.getElementById('linkCodigo').value = projeto.linkCodigo || '';
-                    document.getElementById('imagemUrl').value = projeto.imagemUrl || '';
-                    projetoSubmitBtn.textContent = 'Salvar alterações';
-                    cancelarEdicaoBtn.hidden = false;
-                    projetoForm.scrollIntoView({ behavior: 'smooth' });
-                });
-
-                const excluirBtn = document.createElement('button');
-                excluirBtn.type = 'button';
-                excluirBtn.className = 'admin-btn admin-btn-small admin-btn-danger';
-                excluirBtn.textContent = 'Excluir';
-                excluirBtn.addEventListener('click', async () => {
-                    if (!confirm(`Excluir o projeto "${projeto.titulo}"?`)) return;
-                    await apiFetch(`/api/projetos/${projeto.id}`, { method: 'DELETE' });
-                    carregarProjetos();
-                });
-
-                tdAcoes.append(editarBtn, excluirBtn);
-                tr.append(tdTitulo, tdCategoria, tdAno, tdTecnologias, tdAcoes);
-                projetosTableBody.appendChild(tr);
+                projetosTableBody.appendChild(criarLinhaProjeto(projeto));
             });
         } catch (err) {
             projetosTableBody.innerHTML = '<tr><td colspan="5">Não foi possível carregar os projetos.</td></tr>';
