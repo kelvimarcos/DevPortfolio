@@ -26,7 +26,7 @@ Você pode visualizar o projeto diretamente pelo navegador:
 <br/>
 👉 **https://kelvimarcos.github.io/DevPortfolio/**
 <br/>
-- API: https://devportfolio-tdf4.onrender.com
+- API: hospedada no Render (consumida pelo site)
 - Painel administrativo: acesso restrito por login
 
 
@@ -178,7 +178,35 @@ Integrar front-end e back-end de forma incremental, sem quebrar o que já funcio
 
 ## ▶️ Rodando localmente
 
-Pré-requisitos: Node.js e PostgreSQL instalados.
+Pré-requisitos: Node.js e PostgreSQL instalados, com um banco criado.
+
+**1. Back-end (API)**
+
+```bash
+cd backend
+npm install
+cp .env.example .env
+```
+
+Preencha o `.env` com a sua `DATABASE_URL`, um `SESSION_SECRET` e os dados do administrador (`ADMIN_EMAIL` e `ADMIN_PASSWORD`). Depois:
+
+```bash
+npx prisma migrate dev
+npm run seed
+npm run dev
+```
+
+A API sobe em `http://localhost:3333`.
+
+**2. Front-end**
+
+Abra a pasta `front-end` com um servidor local (por exemplo, a extensão Live Server do VS Code). <br/>
+Quando o site roda em `localhost`, o arquivo `front-end/js/config.js` aponta automaticamente para a API local. <br/>
+O endereço do front precisa estar liberado na variável `CORS_ORIGIN` do `.env` (o exemplo usa `http://localhost:5501`).
+
+**3. Painel administrativo**
+
+Acesse `admin/login.html` e entre com o email e a senha definidos no `.env`.
 
 
 <br/>
@@ -231,6 +259,18 @@ O projeto nasceu no wireframe abaixo, onde defini a estrutura das seções antes
 
 ![Wireframe do projeto](readmeIMG/Wireframe.png)
 
+
+
+<br/>
+<br/>
+
+---
+
+
+## 🔍 Qualidade de código
+
+O projeto passou por um diagnóstico de qualidade e por uma refatoração com foco em Clean Code (nomes descritivos, extração de funções, remoção de duplicação e tratamento de erros com log). <br/>
+Os problemas encontrados, a complexidade ciclomática e as correções aplicadas estão documentados em [DIAGNOSTICO.md](DIAGNOSTICO.md).
 
 
 <br/>
