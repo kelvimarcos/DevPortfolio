@@ -1,4 +1,5 @@
 const prisma = require('../config/prisma');
+const { isRegistroNaoEncontrado } = require('../utils/prismaErrors');
 
 async function listar(req, res, next) {
   try {
@@ -53,7 +54,7 @@ async function atualizar(req, res, next) {
     });
     res.json(projeto);
   } catch (err) {
-    if (err.code === 'P2025') return res.status(404).json({ error: 'Projeto não encontrado.' });
+    if (isRegistroNaoEncontrado(err)) return res.status(404).json({ error: 'Projeto não encontrado.' });
     next(err);
   }
 }
@@ -63,7 +64,7 @@ async function remover(req, res, next) {
     await prisma.projeto.delete({ where: { id: Number(req.params.id) } });
     res.status(204).send();
   } catch (err) {
-    if (err.code === 'P2025') return res.status(404).json({ error: 'Projeto não encontrado.' });
+    if (isRegistroNaoEncontrado(err)) return res.status(404).json({ error: 'Projeto não encontrado.' });
     next(err);
   }
 }

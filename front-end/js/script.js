@@ -44,30 +44,32 @@ const chatTyping = document.getElementById('chatTyping');
 const chatMessage = document.getElementById('chatMessage');
 let chatTimeouts = [];
 
+const CHAT_BUBBLE_DELAY_MS = 550;
+const CHAT_MESSAGE_DELAY_MS = 2000;
+
 function startChatAnimation() {
     // Resetar estado
     if (chatBubble) chatBubble.classList.remove('visible');
     if (chatTyping) chatTyping.classList.remove('hidden');
     if (chatMessage) chatMessage.classList.remove('visible');
 
-    // Passo 1: Mostrar balão com dots de digitando (500ms de delay)
-
-    const t1 = setTimeout(() => {
+    // Passo 1: Mostrar balão com dots de digitando
+    const showBubbleTimeout = setTimeout(() => {
         if (chatBubble) chatBubble.classList.add('visible');
-    }, 550);
+    }, CHAT_BUBBLE_DELAY_MS);
 
-    // Passo 2: Esconder dots e mostrar mensagem (2s total)
-    const t2 = setTimeout(() => {
+    // Passo 2: Esconder dots e mostrar mensagem
+    const showMessageTimeout = setTimeout(() => {
         if (chatTyping) chatTyping.classList.add('hidden');
         if (chatMessage) chatMessage.classList.add('visible');
-    }, 2000);
+    }, CHAT_MESSAGE_DELAY_MS);
 
-    chatTimeouts.push(t1, t2);
+    chatTimeouts.push(showBubbleTimeout, showMessageTimeout);
 }
 
 function resetChatAnimation() {
     // Limpar timeouts pendentes
-    chatTimeouts.forEach(t => clearTimeout(t));
+    chatTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
     chatTimeouts = [];
 
     // Resetar estado
@@ -105,14 +107,17 @@ if (menuBtn && mobileMenu) {
 // Revelação ao Rolar
 const revealElements = document.querySelectorAll('.reveal-text, .work-card, .process-step');
 
+const REVEAL_STAGGER_GROUP_SIZE = 4;
+const REVEAL_STAGGER_STEP_MS = 140;
+
 const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
         if (entry.isIntersecting) {
             // Animação escalonada
-            const delay = Array.from(revealElements).indexOf(entry.target) % 4;
+            const staggerPosition = Array.from(revealElements).indexOf(entry.target) % REVEAL_STAGGER_GROUP_SIZE;
             setTimeout(() => {
                 entry.target.classList.add('visible');
-            }, delay * 140);
+            }, staggerPosition * REVEAL_STAGGER_STEP_MS);
             revealObserver.unobserve(entry.target);
         }
     });

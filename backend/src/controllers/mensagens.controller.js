@@ -1,4 +1,5 @@
 const prisma = require('../config/prisma');
+const { isRegistroNaoEncontrado } = require('../utils/prismaErrors');
 
 async function criar(req, res, next) {
   try {
@@ -47,7 +48,7 @@ async function remover(req, res, next) {
     await prisma.mensagem.delete({ where: { id: Number(req.params.id) } });
     res.status(204).send();
   } catch (err) {
-    if (err.code === 'P2025') return res.status(404).json({ error: 'Mensagem não encontrada.' });
+    if (isRegistroNaoEncontrado(err)) return res.status(404).json({ error: 'Mensagem não encontrada.' });
     next(err);
   }
 }

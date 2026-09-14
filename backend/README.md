@@ -34,7 +34,7 @@ Ver `.env.example`. Copie para `.env` e preencha com os valores reais (esse arqu
 Pre-requisito: PostgreSQL instalado, com um banco criado.
 
 ```bash
-cd server
+cd backend
 npm install
 cp .env.example .env
 npx prisma migrate dev
