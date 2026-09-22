@@ -1,5 +1,7 @@
 ![Capa do projeto](readmeIMG/Capa.png)
 
+[![CI](https://github.com/kelvimarcos/DevPortfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/kelvimarcos/DevPortfolio/actions/workflows/ci.yml)
+
 <br/>
 <br/>
 
@@ -145,6 +147,9 @@ PostgreSQL + Prisma → Banco de dados e ORM <br/>
 bcryptjs + express-session → Autenticação e sessão <br/>
 Docker → Container do back-end <br/>
 GitHub Pages, Render e Supabase → Deploy <br/>
+Jest + Supertest → Testes unitários e de integração da API <br/>
+ESLint + Prettier → Padronização e qualidade do código <br/>
+GitHub Actions → Integração contínua (CI) <br/>
 
 
 <br/>
@@ -271,6 +276,33 @@ O projeto nasceu no wireframe abaixo, onde defini a estrutura das seções antes
 
 O projeto passou por um diagnóstico de qualidade e por uma refatoração com foco em Clean Code (nomes descritivos, extração de funções, remoção de duplicação e tratamento de erros com log). <br/>
 Os problemas encontrados, a complexidade ciclomática e as correções aplicadas estão documentados em [DIAGNOSTICO.md](DIAGNOSTICO.md).
+
+
+<br/>
+<br/>
+
+---
+
+
+## 🧪 Testes e qualidade
+
+A API tem testes automatizados com **Jest** e **Supertest**, que rodam sem banco de dados (o Prisma é simulado nos testes):
+
+- **Testes unitários** (`backend/tests/unit`) → controllers, middlewares e utilitários, cobrindo o caminho feliz e casos de erro (campos obrigatórios, registro inexistente, senha errada, erro interno sem vazar detalhes). <br/>
+- **Teste de integração** (`backend/tests/integration`) → requisições HTTP reais ao app, passando por rotas, autenticação, controllers e tratamento de erros. <br/>
+- **Cobertura mínima de 60% das linhas** em `backend/src`, verificada automaticamente. <br/>
+
+Comandos, dentro da pasta `backend`:
+
+```bash
+npm test                # roda os testes
+npm run test:coverage   # testes + relatório de cobertura (falha abaixo de 60%)
+npm run lint            # ESLint
+npm run format:check    # verifica a formatação com Prettier
+npm run format          # aplica a formatação
+```
+
+A cada push e pull request, o **GitHub Actions** ([ci.yml](.github/workflows/ci.yml)) executa lint, verificação de formatação e testes com cobertura.
 
 
 <br/>
