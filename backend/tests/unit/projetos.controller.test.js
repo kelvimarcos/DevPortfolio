@@ -97,11 +97,7 @@ describe('projetos.controller', () => {
       prisma.projeto.update.mockResolvedValue({ id: 3, titulo: 'Novo título' });
       const res = mockResponse();
 
-      await projetosController.atualizar(
-        { params: { id: '3' }, body: { titulo: 'Novo título' } },
-        res,
-        jest.fn(),
-      );
+      await projetosController.atualizar({ params: { id: '3' }, body: { titulo: 'Novo título' } }, res, jest.fn());
 
       expect(prisma.projeto.update).toHaveBeenCalledWith({
         where: { id: 3 },

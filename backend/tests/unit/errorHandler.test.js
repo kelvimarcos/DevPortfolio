@@ -31,10 +31,7 @@ describe('errorHandler', () => {
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: 'Erro interno do servidor.' });
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      expect.stringContaining('GET /api/projetos -> 500'),
-      erro,
-    );
+    expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining('GET /api/projetos -> 500'), erro);
   });
 
   it('repassa o erro ao Express quando a resposta já foi enviada', () => {

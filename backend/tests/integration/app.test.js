@@ -66,19 +66,14 @@ describe('API (integração)', () => {
     });
 
     it('POST /api/mensagens em JSON incompleto responde 400', async () => {
-      const res = await request(app)
-        .post('/api/mensagens')
-        .send({ nome: 'Maria', email: 'maria@exemplo.com' });
+      const res = await request(app).post('/api/mensagens').send({ nome: 'Maria', email: 'maria@exemplo.com' });
 
       expect(res.status).toBe(400);
       expect(prisma.mensagem.create).not.toHaveBeenCalled();
     });
 
     it('POST /api/mensagens com JSON malformado responde 400 pelo errorHandler', async () => {
-      const res = await request(app)
-        .post('/api/mensagens')
-        .set('Content-Type', 'application/json')
-        .send('{"nome": ');
+      const res = await request(app).post('/api/mensagens').set('Content-Type', 'application/json').send('{"nome": ');
 
       expect(res.status).toBe(400);
       expect(res.body).toHaveProperty('error');

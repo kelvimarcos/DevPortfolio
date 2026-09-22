@@ -38,11 +38,7 @@ describe('mensagens.controller', () => {
       prisma.mensagem.create.mockResolvedValue(registro);
       const res = mockResponse();
 
-      await mensagensController.criar(
-        montarRequisicao({ body: { ...corpoValido, projetoId: '3' } }),
-        res,
-        jest.fn(),
-      );
+      await mensagensController.criar(montarRequisicao({ body: { ...corpoValido, projetoId: '3' } }), res, jest.fn());
 
       expect(prisma.mensagem.create).toHaveBeenCalledWith({
         data: { ...corpoValido, projetoId: 3 },
@@ -85,9 +81,7 @@ describe('mensagens.controller', () => {
         jest.fn(),
       );
 
-      expect(res.redirect).toHaveBeenCalledWith(
-        'https://kelvimarcos.github.io/DevPortfolio/?enviado=1#contato',
-      );
+      expect(res.redirect).toHaveBeenCalledWith('https://kelvimarcos.github.io/DevPortfolio/?enviado=1#contato');
       expect(res.json).not.toHaveBeenCalled();
     });
 

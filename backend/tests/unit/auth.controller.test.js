@@ -75,11 +75,7 @@ describe('auth.controller', () => {
       prisma.admin.create.mockResolvedValue({ id: 1, email: 'novo@exemplo.com' });
       const res = mockResponse();
 
-      await authController.register(
-        { body: { email: 'novo@exemplo.com', senha: 'minha-senha' } },
-        res,
-        jest.fn(),
-      );
+      await authController.register({ body: { email: 'novo@exemplo.com', senha: 'minha-senha' } }, res, jest.fn());
 
       const { data, select } = prisma.admin.create.mock.calls[0][0];
       expect(data.senhaHash).not.toBe('minha-senha');
