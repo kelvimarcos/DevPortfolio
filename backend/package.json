@@ -8,7 +8,10 @@
     "start": "node src/server.js",
     "seed": "node prisma/seed.js",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "lint": "eslint .",
+    "format": "prettier --write src tests prisma/seed.js eslint.config.js",
+    "format:check": "prettier --check src tests prisma/seed.js eslint.config.js"
   },
   "jest": {
     "testEnvironment": "node",
@@ -39,7 +42,12 @@
     "pg": "^8.13.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.12.0",
     "jest": "^30.5.2",
+    "prettier": "^3.9.8",
     "prisma": "^6.1.0",
     "supertest": "^7.2.2"
   }
