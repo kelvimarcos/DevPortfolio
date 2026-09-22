@@ -5,10 +5,34 @@ const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
 const projetosSeed = [
-  { titulo: 'Dashboard', categoria: 'Web App', ano: 2025, tecnologias: 'React · TypeScript · JavaScript', imagemUrl: 'img/projeto 1.png' },
-  { titulo: 'Loja Online Premium', categoria: 'E-Commerce', ano: 2025, tecnologias: 'Next.js · JavaScript · Tailwind', imagemUrl: 'img/projeto 2.png' },
-  { titulo: 'SaaS Landing Page', categoria: 'Landing Page', ano: 2024, tecnologias: 'HTML · CSS · JavaScript', imagemUrl: 'img/projeto 3.png' },
-  { titulo: 'Crypto Exchange', categoria: 'Fintech', ano: 2024, tecnologias: 'Next.js · Web3 · API REST', imagemUrl: 'img/projeto 4.png' },
+  {
+    titulo: 'Dashboard',
+    categoria: 'Web App',
+    ano: 2025,
+    tecnologias: 'React · TypeScript · JavaScript',
+    imagemUrl: 'img/projeto 1.png',
+  },
+  {
+    titulo: 'Loja Online Premium',
+    categoria: 'E-Commerce',
+    ano: 2025,
+    tecnologias: 'Next.js · JavaScript · Tailwind',
+    imagemUrl: 'img/projeto 2.png',
+  },
+  {
+    titulo: 'SaaS Landing Page',
+    categoria: 'Landing Page',
+    ano: 2024,
+    tecnologias: 'HTML · CSS · JavaScript',
+    imagemUrl: 'img/projeto 3.png',
+  },
+  {
+    titulo: 'Crypto Exchange',
+    categoria: 'Fintech',
+    ano: 2024,
+    tecnologias: 'Next.js · Web3 · API REST',
+    imagemUrl: 'img/projeto 4.png',
+  },
 ];
 
 async function main() {
